@@ -4,6 +4,8 @@ Set up of the topology on virtual network called NetKit.
 
 Currently netkit is not supported anymore, the new version is called [Katarah](https://www.netkit.org/).
 
+This is one of my Master course project in networking.
+
 ![GitHub Logo](./networktopology.jpg)
 
 |Collition domain |Subnet |
