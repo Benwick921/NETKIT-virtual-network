@@ -1,0 +1,38 @@
+/etc/init.d/networking restart
+
+ip link set eth0 up
+ip address add 1.0.1.11/31 dev eth0
+ip route add default via 1.0.1.10
+
+ip link set eth1 up
+ip address add 1.0.1.13/31 dev eth1
+
+ip link set eth2 up
+ip address add 1.0.1.15/31 dev eth2
+
+ip link set eth3 up
+ip address add 1.0.1.17/31 dev eth3
+
+/etc/init.d/quagga restart
+/etc/init.d/ssh restart
+mkdir /home/a_user
+useradd a_user -d /home/a_user
+chown a_user:a_user /home/a_user
+echo -e 'user\nuser\n' | passwd a_user 
+
+mkdir /home/a_user/.ssh
+chown a_user:a_user /home/a_user/.ssh
+chmod 700 home/a_user/.ssh
+touch home/a_user/.ssh/authorized_keys
+chown a_user:a_user /home/a_user/.ssh/authorized_keys
+chmod 600 home/a_user/.ssh/authorized_keys
+
+while true; do
+if [ -e /hostlab/id_rsa.pub ]; then
+    cat /hostlab/id_rsa.pub > home/a_user/.ssh/authorized_keys
+    break
+else
+    sleep 1
+fi
+done
+
